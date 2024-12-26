@@ -1,0 +1,1 @@
+insert into admin(ID_Admin, Username, Password,)
