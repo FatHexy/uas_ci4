@@ -1,1 +1,22 @@
-insert into admin(ID_Admin, Username, Password,)
+
+
+select * from admin; select * from anggota; select * from buku; select * from transaksi; select * from log_transaksi; select * from detail_transaksi; select * from katalog;    
+
+
+select * from buku; select * from detail_transaksi;
+
+
+Seorang apoteker ingin mengetahui hubungan antara dosis obat (dalam mg) dengan waktu reaksi obat (dalam
+menit) pada pasien. Berikut data yang ia peroleh dari 7 pasien:
+
+Pasien | Dosis_Obat | Waktu_Reaksi
+1 | 10 | 25
+2 | 15 | 20
+3 | 20 | 15
+4 | 25 | 10
+5 | 30 | 5
+6 | 35 | 3
+7 | 40 | 2
+
+Lakukan analisis regresi linear sederhana untuk mengetahui apakah kecepatan loading mempengaruhi jumlah
+pengunjung. Gunakan tingkat signifikan 5%. Berapakah prediksi waktu reaksi obat jika dosisnya 45 mg?

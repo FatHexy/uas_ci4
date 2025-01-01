@@ -153,6 +153,7 @@ class TransaksiController extends BaseController
                 'transaksi_ID_Transaksi' => $idTransaksi,
                 'buku_Kode_Buku' => $kodeBuku,
                 'Batas_Pengembalian' =>  $this->currentTime->addDays(14)->format('Y-m-d'),
+                'Sisa_Hari' => 14,
             ];
             $this->detailModel->insert($detailData);
             $this->bukuModel->update($kodeBuku, ['Tersedia' => 0]);
@@ -223,6 +224,16 @@ class TransaksiController extends BaseController
                     'Tanggal_Kembali' => $this->currentTime->format('Y-m-d H:i:s'),
                     'Sisa_Hari' => NULL,
                 ])->update();
+
+                // update table buku dan katalog
+                $buku = $this->bukuModel->find($kodeBuku);
+                if ($buku) {
+                    $this->bukuModel->update($kodeBuku, ['Tersedia' => 1]);
+                    $katalogISBN = $buku['katalog_ISBN'];
+                    $this->katalogModel->where('ISBN', $katalogISBN)
+                        ->set('Jumlah_Tersedia', 'Jumlah_Tersedia + 1', false)
+                        ->update();
+                }
             }
 
             $transaksiIds = $this->detailModel->whereIn('buku_Kode_Buku', $buku_dikembalikan)->select('transaksi_ID_Transaksi')->distinct()->findAll();
